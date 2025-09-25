@@ -129,7 +129,68 @@ weather_df |>
   geom_point(color = "purple")
 ```
 
+## Univariate plots
 
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin)) +
+  geom_histogram(color = "white", fill = "red")
+```
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_histogram() +
+  facet_grid(name ~ .)
+```
+
+Maybe a density plot?
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_density(lpha = 0.2)
+```
+
+```{r}
+weather_df |>
+  ggplot(aes(x = name, y = tmin)) +
+  geom_boxplot(aes(fill = name))
+```
+
+violin plots
+
+```{r}
+weather_df |>
+  ggplot(aes(x = name, y = tmin, fill = name)) +
+  geom_violin()
+```
+
+ridge plot
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = name, fill = name)) +
+  geom_density_ridges()
+```
+
+Learning assessment: make plots that compare precipitation across locations.
+
+```{r}
+weather_df |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density()
+
+weather_df |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_histogram() +
+  facet_grid(name ~ .)
+
+weather_df |>
+  filter(prcp > 5, prcp < 1000) |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = 0.2)
+```
 
 
 

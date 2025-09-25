@@ -250,3 +250,123 @@ weather_df |>
     ## (`geom_point()`).
 
 ![](visualization_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+## Univariate plots
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin)) +
+  geom_histogram(color = "white", fill = "red")
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_bin()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_histogram() +
+  facet_grid(name ~ .)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_bin()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+Maybe a density plot?
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, fill = name)) +
+  geom_density(lpha = 0.2)
+```
+
+    ## Warning in geom_density(lpha = 0.2): Ignoring unknown parameters: `lpha`
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_density()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+``` r
+weather_df |>
+  ggplot(aes(x = name, y = tmin)) +
+  geom_boxplot(aes(fill = name))
+```
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_boxplot()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+violin plots
+
+``` r
+weather_df |>
+  ggplot(aes(x = name, y = tmin, fill = name)) +
+  geom_violin()
+```
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_ydensity()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+ridge plot
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, y = name, fill = name)) +
+  geom_density_ridges()
+```
+
+    ## Picking joint bandwidth of 1.41
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_density_ridges()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+Learning assessment: make plots that compare precipitation across
+locations.
+
+``` r
+weather_df |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density()
+```
+
+    ## Warning: Removed 15 rows containing non-finite outside the scale range
+    ## (`stat_density()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+
+``` r
+weather_df |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_histogram() +
+  facet_grid(name ~ .)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 15 rows containing non-finite outside the scale range
+    ## (`stat_bin()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-20-2.png)<!-- -->
+
+``` r
+weather_df |>
+  filter(prcp > 5, prcp < 1000) |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = 0.2)
+```
+
+![](visualization_files/figure-gfm/unnamed-chunk-20-3.png)<!-- -->
