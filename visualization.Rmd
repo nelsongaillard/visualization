@@ -47,10 +47,37 @@ weather_df |>
 
 ## Fancier scatterplots!
 
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(se = FALSE)
+```
 
+Where you define aestherics can matter
 
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name, size = prcp), alpha = 0.3) +
+  geom_smooth(se = FALSE, size = 0.6)
+```
 
+use faceting real quick
 
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.3, size = 0.8) +
+  geom_smooth(se = FALSE, size = 0.6) +
+  facet_grid(. ~ name)
+
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.3, size = 0.8) +
+  geom_smooth(se = FALSE, size = 0.6) +
+  facet_grid(name ~ .)
+```
 
 
 

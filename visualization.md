@@ -73,3 +73,20 @@ weather_df |>
     ## 17 Waterhole_WA USS0023B17S 2022-12-31    76    NA    NA
 
 ## Fancier scatterplots!
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(se = FALSE)
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_smooth()`).
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
