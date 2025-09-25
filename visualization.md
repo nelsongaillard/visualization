@@ -370,3 +370,31 @@ weather_df |>
 ```
 
 ![](visualization_files/figure-gfm/unnamed-chunk-20-3.png)<!-- -->
+
+## Saving and embedding plots
+
+saving plots
+
+``` r
+ggp_weather_violin =
+  weather_df |>
+    ggplot(aes(x = name, y = tmin, fill = name)) +
+    geom_violin()
+  
+ggp_weather_violin
+```
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_ydensity()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+``` r
+ggsave("visualization_files/violin_plot.pdf", ggp_weather_violin,
+       width = 8, height = 6)
+```
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_ydensity()`).
+
+embedding plots
