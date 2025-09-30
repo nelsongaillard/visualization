@@ -530,3 +530,79 @@ ggplot(data = molokai_df, aes(x = date, y = tmax, color = name)) +
     ## (`geom_point()`).
 
 ![](visualization_files/figure-gfm/unnamed-chunk-28-1.png)<!-- -->
+
+### `patchwork`
+
+Make three plots and combine using patchwork.
+
+``` r
+ggp_tmax_tmin =
+  weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  theme(legend.position = "none")
+
+ggp_prec_density =
+  weather_df |>
+  filter(prcp > 0) |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = 0.5) +
+  theme(legend.position = "none")
+
+ggp_temp_season = 
+  weather_df |>
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  theme(legend.position = "none")
+
+(ggp_tmax_tmin + ggp_prec_density)
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-29-1.png)<!-- -->
+
+## Data manipulation
+
+Let’s make temperature violin plots.
+
+``` r
+weather_df |>
+  mutate(name = fct_relevel(name, c("Molokai_HI", "CentralPark_NY", "Waterhold_WA"))) |>
+  ggplot(aes(x = name, y = tmax, fill = name)) +
+  geom_violin(alpha = 0.5)
+```
+
+    ## Warning: There was 1 warning in `mutate()`.
+    ## ℹ In argument: `name = fct_relevel(name, c("Molokai_HI", "CentralPark_NY",
+    ##   "Waterhold_WA"))`.
+    ## Caused by warning:
+    ## ! 1 unknown level in `f`: Waterhold_WA
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_ydensity()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-30-1.png)<!-- -->
+
+``` r
+weather_df |>
+  mutate(name = fct_reorder(name, tmax)) |>
+  ggplot(aes(x = name, y = tmax, fill = name)) +
+  geom_violin(alpha = 0.5)
+```
+
+    ## Warning: There was 1 warning in `mutate()`.
+    ## ℹ In argument: `name = fct_reorder(name, tmax)`.
+    ## Caused by warning:
+    ## ! `fct_reorder()` removing 17 missing values.
+    ## ℹ Use `.na_rm = TRUE` to silence this message.
+    ## ℹ Use `.na_rm = FALSE` to preserve NAs.
+
+    ## Warning: Removed 17 rows containing non-finite outside the scale range
+    ## (`stat_ydensity()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-31-1.png)<!-- -->
+
+What about tidiness?
