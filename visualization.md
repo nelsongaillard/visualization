@@ -441,11 +441,24 @@ weather_df |>
     color = "location"
   ) +
   scale_x_continuous(
-    breaks = c(-20, 0, 25)
+    breaks = c(-20, 0, 25),
+    labels = c("-20C", "0", "25")
+  ) +
+  scale_y_continuous(
+    trans = "sqrt",
+    limits = c(10, 30)
+  ) +
+  viridis::scale_color_viridis(
+    discrete = TRUE
   )
 ```
 
-    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## Warning in transformation$transform(x): NaNs produced
+
+    ## Warning in scale_y_continuous(trans = "sqrt", limits = c(10, 30)): sqrt
+    ## transformation introduced infinite values.
+
+    ## Warning: Removed 843 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
 ![](visualization_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
