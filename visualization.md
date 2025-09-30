@@ -3,6 +3,8 @@ visualization
 Nelson Gaillard
 2025-09-25
 
+## Visualization 1
+
 Import the weather data
 
 ``` r
@@ -398,3 +400,52 @@ ggsave("visualization_files/violin_plot.pdf", ggp_weather_violin,
     ## (`stat_ydensity()`).
 
 embedding plots
+
+## Visualization 2
+
+``` r
+data("weather_df")
+```
+
+Let’s make our basic scatterplot
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.5) +
+  labs(
+    x = "Minimum daily temp",
+    y = "Maximum daily temp", 
+    title = "temperature scatterplot",
+    caption = "Data from NOAA",
+    color = "location"
+  )
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+
+#### Scales
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.5) +
+  labs(
+    x = "Minimum daily temp",
+    y = "Maximum daily temp", 
+    title = "temperature scatterplot",
+    caption = "Data from NOAA",
+    color = "location"
+  ) +
+  scale_x_continuous(
+    breaks = c(-20, 0, 25)
+  )
+```
+
+    ## Warning: Removed 17 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](visualization_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->

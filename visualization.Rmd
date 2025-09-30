@@ -11,6 +11,8 @@ library(ggridges)
 library(p8105.datasets)
 ```
 
+## Visualization 1
+
 Import the weather data
 
 ```{r}
@@ -215,6 +217,46 @@ embedding plots
 
 
 ```
+
+## Visualization 2
+
+```{r}
+data("weather_df")
+```
+
+Let's make our basic scatterplot
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.5) +
+  labs(
+    x = "Minimum daily temp",
+    y = "Maximum daily temp", 
+    title = "temperature scatterplot",
+    caption = "Data from NOAA",
+    color = "location"
+  )
+```
+
+#### Scales
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point(aes(color = name), alpha = 0.5) +
+  labs(
+    x = "Minimum daily temp",
+    y = "Maximum daily temp", 
+    title = "temperature scatterplot",
+    caption = "Data from NOAA",
+    color = "location"
+  ) +
+  scale_x_continuous(
+    breaks = c(-20, 0, 25)
+  )
+```
+
 
 
 
