@@ -302,5 +302,38 @@ ggplot_temperature +
   theme(legend.position = "bottom")
 ```
 
+### Adding data into geoms
+
+```{r}
+central_park_df = 
+  weather_df |>
+  filter(name == "CentralPark_NY")
+
+molokai_df =
+  weather_df |>
+  filter(name == "Molokai_HI")
+
+ggplot(data = molokai_df, aes(x = date, y = tmax)) +
+  geom_point() +
+  geom_line(data = central_park_df)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
